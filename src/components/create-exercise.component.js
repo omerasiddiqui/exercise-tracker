@@ -24,12 +24,13 @@ export default class CreateExercise extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/users')
+        axios.get('https://us-central1-exertracker-ce28a.cloudfunctions.net/getUsers')
             .then(response => {
                 if (response.data.length > 0) {
+                    console.log(response)
                     this.setState({
-                        users: response.data.map(user => user.username),
-                        username: response.data[0].username
+                        users: response.data.map(user => user.username.username),
+                        username: response.data[0].username.username
                     })
                 }
             })
@@ -71,11 +72,11 @@ export default class CreateExercise extends Component {
 
         console.log(exercise);
 
-        axios.post('http://localhost:5000/exercises/add', exercise)
+        axios.post('https://us-central1-exertracker-ce28a.cloudfunctions.net/addExercise', exercise)
             .then(res => console.log(res.data))
             .catch(err => console.log('Error: ' + err));
 
-        window.location = '/';
+        //window.location = '/';
 
     }
 

@@ -30,13 +30,15 @@ export default class CreateExercise extends Component {
 
         console.log(user);
 
-        axios.post('http://localhost:5000/users/add', user)
+        axios.post('https://us-central1-exertracker-ce28a.cloudfunctions.net/addUser', user)
             .then(res => console.log(res.data))
             .catch(err => console.log('Error: ' + err));
 
-        this.setState({
-            username: ''
-        })
+        setTimeout(() => {
+            this.setState({
+                username: ''
+            })
+        }, 600)
     }
 
 
@@ -50,7 +52,7 @@ export default class CreateExercise extends Component {
                         <input type="text"
                             className="form-control"
                             required
-                            value={this.state.user}
+                            value={this.state.username}
                             onChange={this.onChangeUsername}
                         />
                     </div>

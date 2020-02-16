@@ -24,8 +24,9 @@ export default class ExerciseList extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/exercises')
+        axios.get('https://us-central1-exertracker-ce28a.cloudfunctions.net/getExercises')
             .then(response => {
+                console.log(response);
                 this.setState({
                     exercises: response.data
                 })
@@ -45,7 +46,7 @@ export default class ExerciseList extends Component {
 
     exerciseList() {
         return this.state.exercises.map(currentexercise => {
-            return <Exercise exercise={currentexercise} deleteExercise={this.deleteExercise} key={currentexercise._id} />
+            return <Exercise exercise={currentexercise} deleteExercise={this.deleteExercise} key={currentexercise.id} />
         })
     }
 
